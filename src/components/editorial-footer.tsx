@@ -2,10 +2,13 @@ import { LanguageLink } from "./language-link";
 import Link from "next/link";
 import { content, whatsappUrl, type Locale } from "@/lib/content";
 import { Icon } from "./icon";
+import { PrivacyControls } from "./privacy-controls";
 
 export function EditorialFooter({ locale }: { locale: Locale }) {
   const es = locale === "es";
   const t = content[locale];
+  const configuredId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "";
+  const gaId = /^G-[A-Z0-9]+$/.test(configuredId) ? configuredId : "";
   return (
     <footer className="editorial-footer shell">
       <div className="footer-columns">
@@ -52,6 +55,7 @@ export function EditorialFooter({ locale }: { locale: Locale }) {
         <Link href={es ? "/es/privacidad" : "/en/privacy"}>
           {es ? "Política de privacidad" : "Privacy policy"}
         </Link>
+        <PrivacyControls locale={locale} gaId={gaId} />
         <nav aria-label={t.nav.language}>
           <LanguageLink locale="es" current={locale === "es"}>ES</LanguageLink>
           <LanguageLink locale="en" current={locale === "en"}>EN</LanguageLink>

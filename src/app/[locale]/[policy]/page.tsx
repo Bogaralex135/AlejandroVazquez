@@ -6,7 +6,7 @@ export function generateStaticParams() { return [{ locale: "es", policy: "privac
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; policy: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const origin = process.env.NEXT_PUBLIC_SITE_URL;
-  return { title: locale === "es" ? "Política de privacidad | Alejandro Vázquez" : "Privacy policy | Alejandro Vázquez", ...(origin ? { alternates: { canonical: locale === "es" ? "/es/privacidad" : "/en/privacy", languages: { es: "/es/privacidad", en: "/en/privacy" } } } : {}) };
+  return { title: locale === "es" ? "Aviso de Privacidad Integral | Alejandro Vázquez" : "Comprehensive Privacy Notice | Alejandro Vázquez", ...(origin ? { alternates: { canonical: locale === "es" ? "/es/privacidad" : "/en/privacy", languages: { es: "/es/privacidad", en: "/en/privacy" } } } : {}) };
 }
 export default async function Policy({ params }: { params: Promise<{ locale: string; policy: string }> }) {
   const { locale, policy } = await params;

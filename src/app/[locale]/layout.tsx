@@ -5,7 +5,6 @@ import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { content, isLocale, locales } from "@/lib/content";
 import "../globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -87,7 +86,6 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
   return (
     <html
       suppressHydrationWarning
@@ -98,7 +96,6 @@ export default async function LocaleLayout({
         <ThemeInitializer locale={locale} />
       </head>
       <body>{children}</body>
-      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
