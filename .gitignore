@@ -9,3 +9,11 @@ output/
 npm-debug.log*
 .DS_Store
 .vercel/
+.pnp
+.pnp.js
+coverage/
+build/
+*.pem
+yarn-debug.log*
+yarn-error.log*
+next-env.d.ts
