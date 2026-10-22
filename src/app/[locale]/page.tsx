@@ -20,9 +20,9 @@ export default async function Portfolio({
   if (!isLocale(locale)) notFound();
   const t = content[locale];
   const files = [
-    "alejandro-principal.png",
-    "alejandro-alternativa.png",
-    "truckflow.png",
+    "alejandro-principal.webp",
+    "alejandro-alternativa.webp",
+    "truckflow.webp",
     ...t.projects.items.map((project) => project.image),
   ];
   const assets = Object.fromEntries(
@@ -30,9 +30,9 @@ export default async function Portfolio({
       files.map(async (file) => [file, await imageExists(file)] as const),
     ),
   );
-  const portrait = assets["alejandro-principal.png"]
-    ? "alejandro-principal.png"
-    : "alejandro-alternativa.png";
+  const portrait = assets["alejandro-principal.webp"]
+    ? "alejandro-principal.webp"
+    : "alejandro-alternativa.webp";
 
   return (
     <>
@@ -157,7 +157,7 @@ export default async function Portfolio({
             </div>
             <TruckflowCard
               labels={t.projects}
-              available={assets["truckflow.png"]}
+              available={assets["truckflow.webp"]}
               external={t.external}
             />
             <div className="projects-grid">

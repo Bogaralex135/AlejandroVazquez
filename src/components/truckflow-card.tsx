@@ -42,7 +42,7 @@ export function TruckflowCard({
           <div className="flip-face flip-front" aria-hidden={showingBack}>
             <div className="featured-image-wrap">
               <PortfolioImage
-                src="/images/truckflow.png"
+                src="/images/truckflow.webp"
                 alt={`${labels.image} TruckFlow`}
                 label={labels.placeholder}
                 available={available}

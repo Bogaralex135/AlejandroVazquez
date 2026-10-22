@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/preview-static.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate": "npm run lint && npm run typecheck && npm run build"
+    "validate": "npm run lint && npm run typecheck && npm run build",
+    "postbuild": "node scripts/finalize-export.mjs"
   },
   "dependencies": {
     "next": "^16.2.9",
