@@ -56,7 +56,7 @@ export default async function Portfolio({
             </h1>
             <p className="hero-body">{t.hero.body}</p>
             <div className="hero-actions">
-              <WhatsappLink locale={locale}>{t.hero.cta}</WhatsappLink>
+              <WhatsappLink locale={locale} ctaLocation="hero">{t.hero.cta}</WhatsappLink>
               <a className="text-link" href="#projects">
                 {t.hero.secondary}
                 <Icon name="arrow" />
@@ -270,7 +270,7 @@ export default async function Portfolio({
             </div>
             <div className="contact-content">
               <p>{t.contact.text}</p>
-              <WhatsappLink locale={locale} light>
+              <WhatsappLink locale={locale} light ctaLocation="contact">
                 {t.contact.cta}
               </WhatsappLink>
               <span className="contact-note mono">{t.contact.note}</span>

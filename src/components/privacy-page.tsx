@@ -40,7 +40,7 @@ export function PrivacyPage({ locale }: { locale: Locale }) {
       <header className="shell privacy-header">
         <Link href={`/${locale}`}>Alejandro Vázquez</Link>
         <div className="nav-actions">
-          <Link href={es ? "/en/privacy" : "/es/privacidad"} hrefLang={es ? "en" : "es"}>{es ? "EN" : "ES"}</Link>
+          <Link href={es ? "/en/privacy" : "/es/privacidad"} lang={es ? "en" : "es"} hrefLang={es ? "en" : "es"} aria-label={es ? "EN — English" : "ES — Español"}>{es ? "EN" : "ES"}</Link>
           <ThemeToggle locale={locale} />
         </div>
       </header>

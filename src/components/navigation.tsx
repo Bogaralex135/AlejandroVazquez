@@ -14,7 +14,7 @@ export function Navigation({ locale, labels, packagesLabel }: { locale: Locale; 
   return (
     <header className="site-header" id="top" onKeyDown={event => { if (event.key === "Escape" && open) { setOpen(false); menuButton.current?.focus(); } }}>
       <div className="shell nav-shell">
-        <Link className="wordmark" href={`/${locale}`} aria-label="Alejandro Vázquez">
+        <Link className="wordmark" href={`/${locale}`}>
           <span className="brand-symbol" aria-hidden="true">av<span>.</span></span>
           <span>Alejandro<br />Vázquez</span>
         </Link>

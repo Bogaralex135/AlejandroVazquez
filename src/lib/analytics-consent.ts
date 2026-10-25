@@ -3,6 +3,35 @@ export type AnalyticsConsent = "accepted" | "rejected" | null;
 let memoryConsent: AnalyticsConsent = null;
 const changeEvent = "portfolio-analytics-consent-change";
 
+const whatsappValues = {
+  cta_location: ["hero", "package_card", "packages_custom", "contact", "footer"],
+  service: ["general", "landing", "invitation", "software"],
+  package_tier: ["essential", "custom", "not_applicable"],
+  language: ["es", "en"],
+} as const;
+
+export type WhatsappEvent = {
+  [Key in keyof typeof whatsappValues]: (typeof whatsappValues)[Key][number];
+};
+
+function trackWhatsappClick(event: MouseEvent, gaId: string) {
+  if (readConsent() !== "accepted" || window[`ga-disable-${gaId}`] || !window.gtag) return;
+  const link = event.target instanceof Element ? event.target.closest("a[data-whatsapp-cta]") : null;
+  if (!link) return;
+  const parameters = {
+    cta_location: link.getAttribute("data-cta-location"),
+    service: link.getAttribute("data-service"),
+    package_tier: link.getAttribute("data-package-tier"),
+    language: link.getAttribute("data-language"),
+  };
+  // Only these four allowlisted values enter the existing gtag queue.
+  // Never copy the link's URL, text, dataset or arbitrary event properties.
+  for (const key of Object.keys(whatsappValues) as (keyof WhatsappEvent)[]) {
+    if (!(whatsappValues[key] as readonly (string | null)[]).includes(parameters[key])) return;
+  }
+  window.gtag("event", "contact_whatsapp_click", parameters);
+}
+
 export function readConsent(): AnalyticsConsent {
   if (memoryConsent !== null) return memoryConsent;
   try {
@@ -56,6 +85,9 @@ export function disableAnalytics(gaId: string) {
 }
 
 export function loadAnalytics(gaId: string) {
+  // This flag confirms an ADMIN change in GA4 Enhanced Measurement, not a
+  // client-side switch for automatic outbound clicks. Fail closed until confirmed.
+  if (process.env.NEXT_PUBLIC_GA_OUTBOUND_CLICKS_DISABLED !== "true") return;
   if (readConsent() !== "accepted" || document.getElementById("portfolio-analytics")) return;
   const target = window;
   target[`ga-disable-${gaId}`] = false;
@@ -77,5 +109,6 @@ export function loadAnalytics(gaId: string) {
   script.id = "portfolio-analytics";
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+  document.addEventListener("click", event => trackWhatsappClick(event, gaId));
   document.head.appendChild(script);
 }

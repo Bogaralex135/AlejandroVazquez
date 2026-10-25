@@ -14,7 +14,7 @@ export function EditorialFooter({ locale }: { locale: Locale }) {
       <div className="footer-columns">
         <div>
           <Link className="footer-name" href={`/${locale}`}>
-            Alejandro Vázquez<span>.</span>
+            Alejandro Vázquez<span aria-hidden="true">.</span>
           </Link>
           <p>
             {es
@@ -31,6 +31,11 @@ export function EditorialFooter({ locale }: { locale: Locale }) {
             href={whatsappUrl(locale)}
             target="_blank"
             rel="noopener noreferrer"
+            data-whatsapp-cta=""
+            data-cta-location="footer"
+            data-service="general"
+            data-package-tier="not_applicable"
+            data-language={locale}
           >
             <Icon name="whatsapp" />
             WhatsApp<span className="sr-only"> ({t.external})</span>

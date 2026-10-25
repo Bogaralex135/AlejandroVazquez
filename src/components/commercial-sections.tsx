@@ -12,7 +12,7 @@ export function PackagesSection({ locale }: { locale: Locale }) {
     <PackageCards locale={locale} labels={packagePresentation[locale]} t={{ packages: t.packages, included: t.included, exclusions: t.exclusions, conditions: t.conditions, extras: t.extras, extraNote: t.extraNote, quote: t.quote }} prices={t.packages.map((_, i) => packagePrice(i,locale))} quoteUrls={t.packages.map(pack => packageWhatsapp(pack.name,locale))} softwareUrl={packageWhatsapp(packagePresentation[locale].services[2],locale)} />
     <p className="package-tax">{t.tax}</p>
     <div className="commercial-terms"><Disclosure title={t.conditions}><ul>{t.terms.map(term => <li key={term}>{term}</li>)}</ul><p>{t.tax}</p></Disclosure></div>
-    <div className="package-custom-note"><p>{t.close}</p><WhatsappLink locale={locale}>{t.custom}</WhatsappLink></div>
+    <div className="package-custom-note"><p>{t.close}</p><WhatsappLink locale={locale} ctaLocation="packages_custom">{t.custom}</WhatsappLink></div>
   </section>;
 }
 
